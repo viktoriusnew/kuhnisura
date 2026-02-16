@@ -2,6 +2,8 @@
 
 Лендинг на Next.js + shadcn/ui. Домен: kuhnisura.ru, www.kuhnisura.ru.
 
+**Репозиторий**: https://github.com/viktoriusnew/kuhnisura
+
 ## Первый запуск на новом хостинге
 
 ```bash
