@@ -1,8 +1,22 @@
-# kuhnisura.ru
+# Nanonomera — Нано номера
 
-Лендинг на Next.js + shadcn/ui. Домен: kuhnisura.ru, www.kuhnisura.ru.
+Продающий лендинг на Next.js + shadcn/ui. Mobile-first.
+
+**Продукт**: Дубликаты гос номеров с нано-покрытием (невидимы для ИК-камер).
 
 **Репозиторий**: https://github.com/viktoriusnew/kuhnisura
+
+## Структура
+
+- `/` — главная (лендинг)
+- `/blog` — список статей (SEO)
+- `/blog/[slug]` — страница статьи
+
+## Изображения
+
+Добавьте в `app/public/images/`:
+- `hero/` — фото для Hero-секции
+- `reviews/` — скриншоты отзывов
 
 ## Первый запуск на новом хостинге
 
@@ -34,7 +48,3 @@ cd /opt/beget/kuhnisura/app
 npm install
 npm run dev
 ```
-
-## DNS
-
-Добавьте A-записи для kuhnisura.ru и www.kuhnisura.ru → 45.130.212.210

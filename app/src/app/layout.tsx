@@ -1,15 +1,24 @@
 import type { Metadata, Viewport } from 'next';
+import { Header } from '@/components/Header';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'kuhnisura.ru — Кухни на заказ',
-    template: '%s | kuhnisura.ru',
+    default: 'Nanonomera — Нано номера невидимые для камер',
+    template: '%s | Nanonomera',
   },
   description:
-    'Кухни на заказ. Индивидуальный дизайн, качественные материалы, профессиональный монтаж.',
-  keywords: ['кухни на заказ', 'кухни', 'мебель', 'kuhnisura.ru'],
-  authors: [{ name: 'kuhnisura.ru' }],
+    'Эксклюзивные нано дубликаты гос номеров. 98% штрафов не приходят в тёмное время. Соответствуют ГОСТу. Защита от СТРЕЛКА, Кречет, Платон и других камер.',
+  keywords: [
+    'нано номера',
+    'номера без светоотражения',
+    'дубликаты гос номеров',
+    'защита от камер',
+    'невидимые номера',
+    'номера для камер',
+    'штрафы камеры',
+  ],
+  authors: [{ name: 'Nanonomera' }],
   metadataBase: process.env.NEXT_PUBLIC_SITE_URL
     ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
     : new URL('https://kuhnisura.ru'),
@@ -17,9 +26,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
     url: '/',
-    siteName: 'kuhnisura.ru',
-    title: 'kuhnisura.ru — Кухни на заказ',
-    description: 'Кухни на заказ. Индивидуальный дизайн, качественные материалы.',
+    siteName: 'Nanonomera',
+    title: 'Nanonomera — Нано номера невидимые для камер',
+    description:
+      'Эксклюзивные нано дубликаты гос номеров. 98% штрафов не приходят в тёмное время. Соответствуют ГОСТу.',
   },
   robots: {
     index: true,
@@ -34,6 +44,7 @@ export const viewport: Viewport = {
   ],
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -44,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <Header />
         {children}
       </body>
     </html>
