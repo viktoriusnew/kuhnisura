@@ -5,8 +5,8 @@ import ReactMarkdown from 'react-markdown';
 
 function isInternalLink(href: string): boolean {
   try {
-    const url = new URL(href, 'https://kuhnisura.ru');
-    return url.hostname === 'kuhnisura.ru' && url.pathname.startsWith('/blog/');
+    const url = new URL(href, 'https://nanonomera.ru');
+    return url.hostname === 'nanonomera.ru' && url.pathname.startsWith('/blog/');
   } catch {
     return href.startsWith('/blog/');
   }
@@ -14,7 +14,7 @@ function isInternalLink(href: string): boolean {
 
 function getBlogPath(href: string): string {
   try {
-    const url = new URL(href, 'https://kuhnisura.ru');
+    const url = new URL(href, 'https://nanonomera.ru');
     return url.pathname;
   } catch {
     return href.startsWith('/') ? href : `/${href}`;

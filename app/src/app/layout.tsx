@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Nanonomera' }],
   metadataBase: process.env.NEXT_PUBLIC_SITE_URL
     ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-    : new URL('https://kuhnisura.ru'),
+    : new URL('https://nanonomera.ru'),
   openGraph: {
     type: 'website',
     locale: 'ru_RU',

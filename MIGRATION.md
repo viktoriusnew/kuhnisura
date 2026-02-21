@@ -6,8 +6,8 @@
 |-------|----------|
 | `.env` | `SITE_URL=https://nanonomera.ru` |
 | `docker-compose.yml` | Traefik labels: `Host()`, `SSLHost` |
-| `app/src/data/blog.json` | Заменить `kuhnisura.ru` на новый домен |
-| `app/src/components/MarkdownContent.tsx` | Опционально (работает с любым доменом) |
+| `app/src/data/blog.json` | Уже настроен под `nanonomera.ru` |
+| `app/src/components/MarkdownContent.tsx` | Уже настроен под `nanonomera.ru` |
 | `app/src/app/layout.tsx` | Уже использует `NEXT_PUBLIC_SITE_URL` |
 
 ---
@@ -22,33 +22,19 @@
 SITE_URL=https://nanonomera.ru
 ```
 
-Изменить Traefik labels (строки 21–29) — заменить `kuhnisura.ru` на новый домен:
-
-```yaml
-- traefik.http.routers.kuhnisura.rule=Host(`nanonomera.ru`) || Host(`www.nanonomera.ru`)
-- traefik.http.middlewares.kuhnisura.headers.SSLHost=nanonomera.ru
-```
-
-Либо переименовать роутер (например, `nanonomera` вместо `kuhnisura`).
+Traefik labels уже настроены под `nanonomera.ru` (роутер и middleware — `nanonomera`).
 
 ### 2. blog.json — замена домена
 
-Во всех статьях используются полные URL `https://kuhnisura.ru/blog/...`. Их нужно заменить на новый домен.
-
-**Вариант A — массовая замена при миграции:**
-```bash
-sed -i 's|https://kuhnisura.ru|https://nanonomera.ru|g' app/src/data/blog.json
-```
-
-**Вариант B — использовать относительные пути** (потребует доработки кода, см. ниже).
+Все URL в статьях уже используют `https://nanonomera.ru/blog/...`.
 
 ### 3. MarkdownContent.tsx
 
-В `app/src/components/MarkdownContent.tsx` домен `kuhnisura.ru` используется только для парсинга URL. Внутренние ссылки вида `/blog/slug` будут работать на любом домене. Если в `blog.json` оставить полные URL с новым доменом, менять компонент не нужно.
+`MarkdownContent.tsx` уже настроен под `nanonomera.ru`.
 
 ### 4. layout.tsx (metadata)
 
-`metadataBase` уже берётся из `NEXT_PUBLIC_SITE_URL` (fallback `https://kuhnisura.ru`). При задании `SITE_URL` в `.env` на новом сервере metadata подстроится автоматически.
+`metadataBase` берётся из `NEXT_PUBLIC_SITE_URL` (fallback `https://nanonomera.ru`).
 
 ---
 
@@ -60,7 +46,7 @@ sed -i 's|https://kuhnisura.ru|https://nanonomera.ru|g' app/src/data/blog.json
 
 2. **Скопировать проект:**
    ```bash
-   rsync -avz --exclude node_modules --exclude .next /opt/beget/kuhnisura/ user@НОВЫЙ_СЕРВЕР:/path/to/nanonomera/
+   rsync -avz --exclude node_modules --exclude .next ./ user@НОВЫЙ_СЕРВЕР:/path/to/nanonomera/
    ```
    Или через git, если репозиторий настроен.
 
@@ -72,13 +58,7 @@ sed -i 's|https://kuhnisura.ru|https://nanonomera.ru|g' app/src/data/blog.json
 
 4. **Обновить `docker-compose.yml`** — домен в Traefik labels.
 
-5. **Заменить домен в blog.json:**
-   ```bash
-   cd /path/to/nanonomera
-   sed -i 's|https://kuhnisura.ru|https://nanonomera.ru|g' app/src/data/blog.json
-   ```
-
-6. **Сборка и запуск:**
+5. **Сборка и запуск:**
    ```bash
    docker compose build nextjs
    docker compose up -d nextjs
@@ -103,7 +83,7 @@ sed -i 's|https://kuhnisura.ru|https://nanonomera.ru|g' app/src/data/blog.json
 
 Чтобы при следующем переносе не менять `blog.json`, можно:
 
-1. **В blog.json** использовать относительные пути: `/blog/slug` вместо `https://kuhnisura.ru/blog/slug`.
+1. **В blog.json** можно использовать относительные пути: `/blog/slug` вместо полных URL.
 2. **В blog.ts** — `extractSlug` уже извлекает slug из пути, относительные пути будут работать.
 3. **В MarkdownContent** — `isInternalLink` и `getBlogPath` корректно обрабатывают `/blog/...`.
 

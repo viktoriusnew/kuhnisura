@@ -4,7 +4,7 @@
 
 **Продукт**: Дубликаты гос номеров с нано-покрытием (невидимы для ИК-камер).
 
-**Репозиторий**: https://github.com/viktoriusnew/kuhnisura
+**Репозиторий**: https://github.com/viktoriusnew/nanonomera
 
 ## Структура
 
@@ -28,7 +28,7 @@ cp .env.example .env
 ## Запуск
 
 ```bash
-cd /opt/beget/kuhnisura
+cd /path/to/nanonomera
 docker compose up -d --build
 ```
 
@@ -44,7 +44,7 @@ docker compose build nextjs    # пересборка после изменен�
 ## Локальная разработка
 
 ```bash
-cd /opt/beget/kuhnisura/app
+cd /path/to/nanonomera/app
 npm install
 npm run dev
 ```
