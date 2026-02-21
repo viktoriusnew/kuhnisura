@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, Shield, Truck, Zap } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, Shield, Truck, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -17,33 +18,40 @@ const TG_GROUP_URL = 'https://t.me/nanonomera';
 
 export default function Home() {
   const posts = getBlogPosts().slice(0, 3);
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   return (
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-emerald-500/10 via-background to-background" />
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-brand-emerald-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-brand-emerald-600/10 rounded-full blur-3xl" />
+        {/* Фоновое изображение */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/hero/1.png')" }}
+        />
+        {/* Тёмный оверлей для читаемости текста */}
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
-        <div className="relative container mx-auto px-4 py-12 sm:py-20 text-center">
+        <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-emerald-500/10 border border-brand-emerald-500/20 mb-6 sm:mb-8">
             <Shield className="h-4 w-4 text-brand-emerald-500" />
             <span className="text-sm text-brand-emerald-400">
-              Эксклюзивные нано дубликаты
+              Эксклюзивные нано дубликаты гос номеров
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6">
-            Будь невидим
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
+            <span className="text-white">ШТРАФОВ НЕТ!</span>
             <br />
-            <span className="text-brand-emerald-500">для камер</span>
+            <span className="text-brand-emerald-500">Будь невидим для штрафных камер!</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10">
             Уникальная технология изменённой степени светоотражения: камера
             фиксирует, но номер не видит. Для человеческого глаза — никаких
-            изменений, полное соответствие ГОСТу!
+            изменений, полное соответствие ГОСТу! На камерах видеонаблюдения
+            номера видно!
           </p>
 
           <Button
@@ -118,6 +126,14 @@ export default function Home() {
             </p>
           </div>
 
+          <div className="max-w-3xl mx-auto mb-12">
+            <img
+              src="/images/how/ir-cameras.jpg"
+              alt="Принцип работы ИК-камер фиксации"
+              className="w-full rounded-xl border border-border object-cover"
+            />
+          </div>
+
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="flex gap-4 p-4 rounded-xl bg-card border border-border">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-emerald-500/20 text-brand-emerald-500 flex items-center justify-center text-sm font-bold">
@@ -174,6 +190,14 @@ export default function Home() {
             </p>
           </div>
 
+          <div className="max-w-3xl mx-auto mb-12">
+            <img
+              src="/images/cameras/15.png"
+              alt="Камеры фиксации"
+              className="w-full rounded-xl border border-border object-cover"
+            />
+          </div>
+
           <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <Card className="border-border border-brand-emerald-500/30">
               <CardHeader>
@@ -228,19 +252,32 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              'Стандартные 1:1 как в ГИБДД',
-              'Без флага',
-              'С жирным шрифтом',
-              'Квадратные',
+              { title: 'Стандартные 1:1 как в ГИБДД', image: '/images/variants/standard.png' },
+              { title: 'Без флага', image: '/images/variants/without-flag.jpg' },
+              { title: 'С жирным шрифтом', image: '/images/variants/bold.jpg' },
+              { title: 'Квадратные', image: '/images/variants/square.jpg' },
+              { title: 'Казахстан', image: '/images/variants/kaz.jpeg' },
+              { title: 'Киргизия', image: '/images/variants/KG.jpg' },
+              { title: 'Азербайджан', image: '/images/variants/az.png' },
+              { title: 'Узбекистан', image: '/images/variants/UZ.jpg' },
+              { title: 'Белоруссия', image: '/images/variants/BY.jpg' },
+              { title: 'Абхазия', image: '/images/variants/AB.png' },
             ].map((variant) => (
               <Card
-                key={variant}
-                className="border-border text-center hover:border-brand-emerald-500/50 transition-colors"
+                key={variant.title}
+                className="border-border text-center hover:border-brand-emerald-500/50 transition-colors overflow-hidden"
               >
+                <div className="aspect-[2/1] overflow-hidden bg-muted">
+                  <img
+                    src={variant.image}
+                    alt={variant.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <CardHeader>
-                  <CardDescription className="text-sm">{variant}</CardDescription>
+                  <CardDescription className="text-sm">{variant.title}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
@@ -256,11 +293,11 @@ export default function Home() {
               Сроки и доставка
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              РФ и Москва
+              РФ, Москва и мир
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <Card className="border-border">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -282,6 +319,17 @@ export default function Home() {
                 <CardContent className="pt-2 space-y-2 text-sm text-muted-foreground">
                   <p>• В пределах МКАД: курьер 600₽ — 1–2 дня</p>
                   <p>• За МКАД: только через СДЕК</p>
+                </CardContent>
+              </CardHeader>
+            </Card>
+            <Card className="border-border">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Truck className="h-5 w-5 text-brand-emerald-500" />
+                  По миру
+                </CardTitle>
+                <CardContent className="pt-2 space-y-2 text-sm text-muted-foreground">
+                  <p>• Обговаривается индивидуально</p>
                 </CardContent>
               </CardHeader>
             </Card>
@@ -311,6 +359,72 @@ export default function Home() {
               >
                 <Check className="h-5 w-5 text-brand-emerald-500 shrink-0 mt-0.5" />
                 <p className="text-foreground">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Отзывы */}
+      <section id="reviews" className="py-16 sm:py-24 bg-card/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Отзывы
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Что говорят наши клиенты
+            </p>
+          </div>
+
+          {/* Мобильная версия: 1 фото + кнопка */}
+          <div className="sm:hidden">
+            <div className="rounded-xl overflow-hidden border border-border bg-card">
+              <img
+                src="/images/reviews/1.png"
+                alt="Отзыв 1"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            {!showAllReviews ? (
+              <Button
+                variant="outline"
+                className="w-full mt-4"
+                onClick={() => setShowAllReviews(true)}
+              >
+                Посмотреть все
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            ) : (
+              <div className="grid grid-cols-1 gap-4 mt-4">
+                {[2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl overflow-hidden border border-border bg-card"
+                  >
+                    <img
+                      src={`/images/reviews/${i}.png`}
+                      alt={`Отзыв ${i}`}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Десктоп: все фото сразу */}
+          <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <div
+                key={i}
+                className="rounded-xl overflow-hidden border border-border bg-card"
+              >
+                <img
+                  src={`/images/reviews/${i}.png`}
+                  alt={`Отзыв ${i}`}
+                  className="w-full h-auto object-cover"
+                />
               </div>
             ))}
           </div>
