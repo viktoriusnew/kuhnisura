@@ -4,7 +4,7 @@
 
 **Быстрый старт (после установки Docker):**
 ```bash
-git clone https://github.com/viktoriusnew/kuhnisura.git nanonomera && cd nanonomera
+git clone https://github.com/viktoriusnew/nanonomera.git nanonomera && cd nanonomera
 cp .env.example .env
 docker compose -f docker-compose.standalone.yml up -d --build
 ```
@@ -43,7 +43,7 @@ sudo usermod -aG docker $USER
 Если на VPS уже запущен Traefik в сети `n8n_default`:
 
 ```bash
-git clone https://github.com/viktoriusnew/kuhnisura.git nanonomera
+git clone https://github.com/viktoriusnew/nanonomera.git nanonomera
 cd nanonomera
 cp .env.example .env
 # .env уже содержит SITE_URL=https://nanonomera.ru
@@ -55,7 +55,7 @@ docker compose up -d --build
 Используйте `docker-compose.standalone.yml` — он поднимает Traefik и сайт вместе:
 
 ```bash
-git clone https://github.com/viktoriusnew/kuhnisura.git nanonomera
+git clone https://github.com/viktoriusnew/nanonomera.git nanonomera
 cd nanonomera
 cp .env.example .env
 # Опционально в .env: ACME_EMAIL=ваш@email.ru (для Let's Encrypt)
